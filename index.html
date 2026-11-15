@@ -3,185 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <!-- LIGNES MAGIQUES PLEIN ÉCRAN SANS BARRE CHROME -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#075E54">
-  <link rel="manifest" href='data:application/manifest+json,{"name":"CaissePro Guinée","short_name":"CaissePro","display":"standalone","background_color":"#f0f2f5","theme_color":"#075E54"}'>
-  <title>CaissePro Guinée</title>
+  <title>Studio CV Pro Guinée</title>
   <style>
-    * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-    body { background: #f0f2f5; margin: 0; padding: 12px; color: #1c1e21; }
-    .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-    .header { background: #075E54; color: white; text-align: center; padding: 15px; border-radius: 12px; margin-bottom: 12px; }
-    .header h2 { margin: 0; font-size: 20px; }
-    .header p { margin: 4px 0 0; font-size: 13px; opacity: 0.9; }
-    label { font-size: 13px; font-weight: bold; display: block; margin-top: 8px; color: #444; }
-    input, select { width: 100%; padding: 11px; margin-top: 4px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; }
-    .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 12px; }
-    .btn-add { background: #128C7E; color: white; }
-    .btn-wa { background: #25D366; color: white; font-size: 17px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .btn-reset { background: #dc3545; color: white; font-size: 13px; padding: 9px; margin-top: 8px; }
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-    .stat-box { background: #f8f9fa; padding: 10px; border-radius: 8px; text-align: center; border-left: 4px solid #128C7E; }
-    .stat-box span { display: block; font-size: 12px; color: #666; }
-    .stat-box strong { font-size: 15px; color: #111; }
-    .sale-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-    .badge { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-    .Espèces { background: #d4edda; color: #155724; }
-    .Orange { background: #ffe5d0; color: #d9480f; }
-    .MTN { background: #fff3cd; color: #856404; }
-    .Crédit { background: #f8d7da; color: #721c24; }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Arial, sans-serif; }
+    body { background: #eef2f5; margin: 0; padding: 10px; color: #222; }
+    .app-header { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; text-align: center; padding: 15px; border-radius: 12px; margin-bottom: 12px; }
+    .app-header h2 { margin: 0; font-size: 19px; }
+    .app-header p { margin: 4px 0 0; font-size: 12px; opacity: 0.85; }
+    .card { background: white; padding: 14px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+    label { font-size: 12px; font-weight: bold; color: #444; display: block; margin-top: 8px; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 4px; border: 1px solid #ccd0d5; border-radius: 8px; font-size: 14px; }
+    textarea { height: 70px; resize: vertical; }
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .btn-magic { background: #ff9800; color: #fff; }
+    .btn-cv { background: #1a73e8; color: #fff; font-size: 16px; }
+    .btn-wa { background: #25D366; color: #fff; font-size: 15px; }
+    .btn-back { background: #333; color: #fff; margin-bottom: 10px; }
+    #cvPreviewArea { display: none; }
+    .cv-sheet { background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #ddd; }
+    .cv-top { background: #1e3c72; color: white; padding: 20px 16px; }
+    .cv-top h1 { margin: 0; font-size: 22px; text-transform: uppercase; }
+    .cv-top h3 { margin: 5px 0 10px; font-size: 15px; color: #ffd700; }
+    .cv-contact { font-size: 12px; line-height: 1.6; }
+    .cv-body { padding: 16px; }
+    .cv-sec { margin-bottom: 14px; }
+    .cv-sec-title { font-size: 13px; font-weight: bold; color: #1e3c72; text-transform: uppercase; border-bottom: 2px solid #1e3c72; padding-bottom: 3px; margin-bottom: 6px; }
+    .cv-sec-content { font-size: 13px; line-height: 1.5; color: #333; white-space: pre-line; }
+    @media print {
+      body { background: white; padding: 0; }
+      .no-print { display: none !important; }
+      .cv-sheet { box-shadow: none; border: none; }
+    }
   </style>
 </head>
 <body>
-
-  <div class="header">
-    <h2>🇬🇳 CaissePro WhatsApp</h2>
-    <p>Gestion Boutique & Anti-Vol en Temps Réel</p>
-  </div>
-
-  <div class="card">
-    <label>🏪 Nom de la Boutique :</label>
-    <input type="text" id="shopName" placeholder="Ex: Boutique Barry & Frères" onchange="saveConfig()">
-    <label>📲 Numéro WhatsApp du Patron (sans +224) :</label>
-    <input type="tel" id="bossPhone" placeholder="Ex: 622000000" onchange="saveConfig()">
-  </div>
-
-  <div class="card">
-    <h3 style="margin:0 0 8px 0; font-size:16px;">➕ Enregistrer une Vente</h3>
-    <label>Article / Produit vendu :</label>
-    <input type="text" id="itemName" placeholder="Ex: Sac de riz 50kg / Chargeur...">
-    
-    <label>Montant (en FG) :</label>
-    <input type="number" id="itemPrice" placeholder="Ex: 350000">
-
-    <label>Mode de Paiement :</label>
-    <select id="payMethod">
-      <option value="Espèces">💵 Espèces (Cash en caisse)</option>
-      <option value="Orange Money">🟧 Orange Money</option>
-      <option value="MTN MoMo">🟨 MTN MoMo</option>
-      <option value="Crédit">📝 Crédit Client (Non payé)</option>
-    </select>
-
-    <button class="btn btn-add" onclick="addSale()">✅ Valider la Vente (Verrouillé)</button>
-  </div>
-
-  <div class="card">
-    <h3 style="margin:0 0 8px 0; font-size:16px;">📊 Bilan de la Caisse (Aujourd'hui)</h3>
-    <div class="stats-grid">
-      <div class="stat-box"><span>Total Général</span><strong id="totAll">0 FG</strong></div>
-      <div class="stat-box" style="border-color:#28a745"><span>💵 Cash en Caisse</span><strong id="totCash">0 FG</strong></div>
-      <div class="stat-box" style="border-color:#fd7e14"><span>🟧 Orange / MTN</span><strong id="totMobile">0 FG</strong></div>
-      <div class="stat-box" style="border-color:#dc3545"><span>📝 Crédits Clients</span><strong id="totCredit">0 FG</strong></div>
+  <div id="editorArea">
+    <div class="app-header">
+      <h2>🇬🇳 Studio CV Pro & Lettre PDF</h2>
+      <p>Créez un CV + Lettre de Motivation en 1 minute</p>
     </div>
-
-    <button class="btn btn-wa" onclick="sendWhatsApp()">📲 Envoyer le Rapport au Patron</button>
+    <div class="card">
+      <label>👤 Nom et Prénom du Client :</label>
+      <input type="text" id="fullName" placeholder="Ex: Mamadou Saliou Diallo">
+      <label>🎯 Poste visé / Métier :</label>
+      <input type="text" id="jobTitle" placeholder="Ex: Chauffeur Poids Lourd / Comptable">
+      <label>🏢 Entreprise visée (pour la Lettre) :</label>
+      <input type="text" id="company" placeholder="Ex: Rio Tinto Simandou / Orange Guinée">
+      <label>📞 Téléphone & Quartier :</label>
+      <input type="text" id="contactInfo" placeholder="Ex: +224 622 00 00 00 | Kipé, Conakry">
+      <button class="btn btn-magic" onclick="autoFillPro()">✨ Remplir le texte Pro automatiquement</button>
+    </div>
+    <div class="card">
+      <label>📝 Profil Professionnel :</label>
+      <textarea id="profileText"></textarea>
+      <label>💼 Expériences Professionnelles :</label>
+      <textarea id="expText"></textarea>
+      <label>🎓 Diplômes & Formations :</label>
+      <textarea id="eduText"></textarea>
+      <label>⚡ Compétences & Langues :</label>
+      <textarea id="skillsText"></textarea>
+      <button class="btn btn-cv" onclick="showCV()">📄 Générer le CV Pro (Plein Écran / PDF)</button>
+      <button class="btn btn-wa" onclick="sendCoverLetter()">📲 Envoyer la Lettre sur WhatsApp</button>
+    </div>
   </div>
 
-  <div class="card">
-    <h3 style="margin:0 0 8px 0; font-size:16px;">🔒 Journal des Ventes (Anti-Suppression)</h3>
-    <div id="salesList">Aucune vente enregistrée aujourd'hui.</div>
-    <button class="btn btn-reset" onclick="resetDay()">🔑 Clôturer la journée (Code PIN Patron)</button>
+  <div id="cvPreviewArea">
+    <div class="no-print">
+      <button class="btn btn-back" onclick="hideCV()">⬅️ Modifier les informations</button>
+      <button class="btn btn-cv" style="margin-top:0; margin-bottom:10px;" onclick="window.print()">📥 Enregistrer en PDF / Imprimer</button>
+    </div>
+    <div class="cv-sheet">
+      <div class="cv-top">
+        <h1 id="outName">NOM PRÉNOM</h1>
+        <h3 id="outJob">TITRE DU POSTE</h3>
+        <div class="cv-contact" id="outContact">📍 Conakry, Guinée</div>
+      </div>
+      <div class="cv-body">
+        <div class="cv-sec"><div class="cv-sec-title">PROFIL PROFESSIONNEL</div><div class="cv-sec-content" id="outProfile"></div></div>
+        <div class="cv-sec"><div class="cv-sec-title">EXPÉRIENCES PROFESSIONNELLES</div><div class="cv-sec-content" id="outExp"></div></div>
+        <div class="cv-sec"><div class="cv-sec-title">DIPLÔMES & FORMATIONS</div><div class="cv-sec-content" id="outEdu"></div></div>
+        <div class="cv-sec"><div class="cv-sec-title">COMPÉTENCES & ATOUTS</div><div class="cv-sec-content" id="outSkills"></div></div>
+      </div>
+    </div>
   </div>
 
 <script>
-  let sales = JSON.parse(localStorage.getItem('gn_sales')) || [];
-  document.getElementById('shopName').value = localStorage.getItem('gn_shop') || 'Boutique Conakry';
-  document.getElementById('bossPhone').value = localStorage.getItem('gn_phone') || '';
-
-  function saveConfig() {
-    localStorage.setItem('gn_shop', document.getElementById('shopName').value);
-    localStorage.setItem('gn_phone', document.getElementById('bossPhone').value);
+  function autoFillPro() {
+    const job = document.getElementById('jobTitle').value.trim() || "Professionnel qualifié";
+    document.getElementById('profileText').value = `Professionnel dynamique, rigoureux et doté d'un grand sens des responsabilités en tant que ${job}. Habitué aux exigences de sécurité et de performance, je souhaite mettre mon savoir-faire au service de votre entreprise.`;
+    document.getElementById('expText').value = `• 2022 - 2024 : ${job} — Conakry, Guinée\nGestion quotidienne des opérations, respect strict des consignes de sécurité et atteinte des objectifs.\n\n• 2020 - 2022 : Assistant ${job}\nAppui technique, suivi du matériel et travail en équipe.`;
+    document.getElementById('eduText').value = `• Diplôme Professionnel / Certificat d'Aptitude — Conakry\n• Formation aux normes de sécurité (HSE) et travail d'équipe.`;
+    document.getElementById('skillsText').value = `• Compétences : Ponctualité, Rigueur, Esprit d'équipe, Respect des normes HSE.\n• Langues : Français (Courant), Soussou, Poular, Malinké.`;
+    alert("✨ Texte professionnel rempli automatiquement !");
   }
-
-  function formatFG(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FG";
+  function showCV() {
+    document.getElementById('outName').innerText = document.getElementById('fullName').value || "MAMADOU DIALLO";
+    document.getElementById('outJob').innerText = document.getElementById('jobTitle').value || "PROFESSIONNEL QUALIFIÉ";
+    document.getElementById('outContact').innerText = "📍 " + (document.getElementById('contactInfo').value || "Conakry, Guinée");
+    document.getElementById('outProfile').innerText = document.getElementById('profileText').value;
+    document.getElementById('outExp').innerText = document.getElementById('expText').value;
+    document.getElementById('outEdu').innerText = document.getElementById('eduText').value;
+    document.getElementById('outSkills').innerText = document.getElementById('skillsText').value;
+    document.getElementById('editorArea').style.display = 'none';
+    document.getElementById('cvPreviewArea').style.display = 'block';
+    window.scrollTo(0,0);
   }
-
-  function addSale() {
-    const name = document.getElementById('itemName').value.trim();
-    const price = parseInt(document.getElementById('itemPrice').value);
-    const method = document.getElementById('payMethod').value;
-
-    if (!name || !price || price <= 0) {
-      alert("⚠️ Veuillez entrer le nom de l'article et un montant valide en FG !");
-      return;
-    }
-
-    const now = new Date();
-    const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-
-    sales.push({ time, name, price, method });
-    localStorage.setItem('gn_sales', JSON.stringify(sales));
-
-    document.getElementById('itemName').value = '';
-    document.getElementById('itemPrice').value = '';
-    render();
+  function hideCV() {
+    document.getElementById('cvPreviewArea').style.display = 'none';
+    document.getElementById('editorArea').style.display = 'block';
   }
-
-  function render() {
-    let totAll = 0, totCash = 0, totMobile = 0, totCredit = 0;
-    const list = document.getElementById('salesList');
-    list.innerHTML = '';
-
-    sales.forEach((s) => {
-      totAll += s.price;
-      if (s.method === 'Espèces') totCash += s.price;
-      else if (s.method === 'Crédit') totCredit += s.price;
-      else totMobile += s.price;
-
-      const badgeClass = s.method.split(' ')[0];
-      list.innerHTML += `
-        <div class="sale-item">
-          <div><strong>[${s.time}]</strong> ${s.name} <span class="badge ${badgeClass}">${s.method}</span></div>
-          <div><strong>${formatFG(s.price)}</strong></div>
-        </div>`;
-    });
-
-    if (sales.length === 0) list.innerHTML = "Aucune vente enregistrée aujourd'hui.";
-
-    document.getElementById('totAll').innerText = formatFG(totAll);
-    document.getElementById('totCash').innerText = formatFG(totCash);
-    document.getElementById('totMobile').innerText = formatFG(totMobile);
-    document.getElementById('totCredit').innerText = formatFG(totCredit);
+  function sendCoverLetter() {
+    const name = document.getElementById('fullName').value || "Prénom Nom";
+    const job = document.getElementById('jobTitle').value || "le poste proposé";
+    const comp = document.getElementById('company').value || "votre entreprise";
+    const contact = document.getElementById('contactInfo').value || "+224 ...";
+    const letter = `📄 *LETTRE DE MOTIVATION*\n\n*Expéditeur :* ${name}\n*Contact :* ${contact}\n*Objet :* Candidature au poste de ${job}\n\nMadame, Monsieur le Directeur des Ressources Humaines de *${comp}*,\n\nC'est avec un vif intérêt que je vous soumets ma candidature pour le poste de *${job}* au sein de votre structure.\n\nSérieux, travailleur et immédiatement disponible, je possède une solide expérience pratique ainsi qu'une grande capacité d'adaptation aux normes de sécurité et d'efficacité. Intégrer ${comp} représente pour moi l'opportunité de contribuer activement à la réussite de vos objectifs en Guinée.\n\nVeuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.\n\n*${name}*`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(letter)}`, '_blank');
   }
-
-  function sendWhatsApp() {
-    const shop = document.getElementById('shopName').value || 'Ma Boutique';
-    let phone = document.getElementById('bossPhone').value.replace(/\s+/g, '');
-    if (phone && !phone.startsWith('224') && !phone.startsWith('+224')) phone = '224' + phone;
-
-    let totAll = 0, totCash = 0, totMobile = 0, totCredit = 0;
-    let details = '';
-    sales.forEach((s, i) => {
-      totAll += s.price;
-      if (s.method === 'Espèces') totCash += s.price;
-      else if (s.method === 'Crédit') totCredit += s.price;
-      else totMobile += s.price;
-      details += `${i+1}. [${s.time}] ${s.name} : ${formatFG(s.price)} (${s.method})\n`;
-    });
-
-    const dateStr = new Date().toLocaleDateString('fr-FR');
-    const msg = `📊 *RAPPORT CAISSE - ${shop.toUpperCase()}*\n📅 Date : ${dateStr}\n━━━━━━━━━━━━━━\n💰 *TOTAL VENTES : ${formatFG(totAll)}*\n💵 Cash en caisse : ${formatFG(totCash)}\n📲 Orange/MTN : ${formatFG(totMobile)}\n📝 Crédits : ${formatFG(totCredit)}\n━━━━━━━━━━━━━━\n📋 *DÉTAIL (${sales.length} ventes) :*\n${details || 'Aucune vente'}`;
-
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  }
-
-  function resetDay() {
-    const pin = prompt("🔒 Entrez le Code PIN Secret du Patron pour vider la caisse (Code par défaut : 1234) :");
-    if (pin === "1234") {
-      sales = [];
-      localStorage.removeItem('gn_sales');
-      render();
-      alert("✅ Journée clôturée et caisse remise à zéro !");
-    } else if (pin !== null) {
-      alert("❌ Code PIN incorrect ! Seul le patron peut effacer les ventes.");
-    }
-  }
-
-  render();
 </script>
 </body>
 </html>
