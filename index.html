@@ -2,8 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CaissePro Guinée - WhatsApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- LIGNES MAGIQUES PLEIN ÉCRAN SANS BARRE CHROME -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#075E54">
+  <link rel="manifest" href='data:application/manifest+json,{"name":"CaissePro Guinée","short_name":"CaissePro","display":"standalone","background_color":"#f0f2f5","theme_color":"#075E54"}'>
+  <title>CaissePro Guinée</title>
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
     body { background: #f0f2f5; margin: 0; padding: 12px; color: #1c1e21; }
@@ -36,7 +41,6 @@
     <p>Gestion Boutique & Anti-Vol en Temps Réel</p>
   </div>
 
-  <!-- Paramètres Boutique -->
   <div class="card">
     <label>🏪 Nom de la Boutique :</label>
     <input type="text" id="shopName" placeholder="Ex: Boutique Barry & Frères" onchange="saveConfig()">
@@ -44,7 +48,6 @@
     <input type="tel" id="bossPhone" placeholder="Ex: 622000000" onchange="saveConfig()">
   </div>
 
-  <!-- Enregistrer une vente -->
   <div class="card">
     <h3 style="margin:0 0 8px 0; font-size:16px;">➕ Enregistrer une Vente</h3>
     <label>Article / Produit vendu :</label>
@@ -64,7 +67,6 @@
     <button class="btn btn-add" onclick="addSale()">✅ Valider la Vente (Verrouillé)</button>
   </div>
 
-  <!-- Tableau de Bord -->
   <div class="card">
     <h3 style="margin:0 0 8px 0; font-size:16px;">📊 Bilan de la Caisse (Aujourd'hui)</h3>
     <div class="stats-grid">
@@ -77,7 +79,6 @@
     <button class="btn btn-wa" onclick="sendWhatsApp()">📲 Envoyer le Rapport au Patron</button>
   </div>
 
-  <!-- Historique -->
   <div class="card">
     <h3 style="margin:0 0 8px 0; font-size:16px;">🔒 Journal des Ventes (Anti-Suppression)</h3>
     <div id="salesList">Aucune vente enregistrée aujourd'hui.</div>
@@ -124,7 +125,7 @@
     const list = document.getElementById('salesList');
     list.innerHTML = '';
 
-    sales.forEach((s, index) => {
+    sales.forEach((s) => {
       totAll += s.price;
       if (s.method === 'Espèces') totCash += s.price;
       else if (s.method === 'Crédit') totCredit += s.price;
