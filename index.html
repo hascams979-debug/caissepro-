@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Studio CV Pro Guinée</title>
+  <title>Studio CV Pro & Manuel Soudure</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
@@ -18,12 +18,12 @@
     textarea { height: 75px; resize: vertical; }
     .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     .btn-weld { background: #d9534f; color: #fff; }
+    .btn-course { background: #6f42c1; color: #fff; }
     .btn-magic { background: #ff9800; color: #fff; }
     .btn-cv { background: #1a73e8; color: #fff; font-size: 16px; }
     .btn-wa { background: #25D366; color: #fff; font-size: 15px; }
     .btn-back { background: #333; color: #fff; margin-bottom: 8px; }
-    #cvPreviewArea { display: none; }
-    /* FORMAT EXACT A4 SANS COUPURE */
+    #cvPreviewArea, #courseArea { display: none; }
     .cv-sheet { background: white; width: 100%; max-width: 700px; margin: 0 auto; border: 1px solid #ddd; overflow: visible; }
     .cv-top { background: #1e3c72; color: white; padding: 18px 16px; }
     .cv-top h1 { margin: 0; font-size: 20px; text-transform: uppercase; }
@@ -33,14 +33,22 @@
     .cv-sec { margin-bottom: 12px; }
     .cv-sec-title { font-size: 12px; font-weight: bold; color: #1e3c72; text-transform: uppercase; border-bottom: 2px solid #1e3c72; padding-bottom: 2px; margin-bottom: 5px; }
     .cv-sec-content { font-size: 12px; line-height: 1.45; color: #222; white-space: pre-line; }
+    .lesson-box { background: #f8f9fa; border-left: 4px solid #d9534f; padding: 10px; margin-bottom: 10px; font-size: 12px; line-height: 1.45; }
+    .lesson-box h4 { margin: 0 0 6px 0; color: #b52b27; font-size: 13px; text-transform: uppercase; }
   </style>
 </head>
 <body>
   <div id="editorArea">
     <div class="app-header">
-      <h2>🇬🇳 Studio CV Pro & Lettre PDF</h2>
-      <p>Créez et téléchargez votre CV PDF complet en 1 clic</p>
+      <h2>🇬🇳 Studio CV Pro & Formation Mine</h2>
+      <p>Créez vos CV PDF & Révisez la Soudure Minière</p>
     </div>
+
+    <!-- BOUTON MANUEL DE SOUDURE PDF -->
+    <div class="card" style="padding:10px;">
+      <button class="btn btn-course" style="margin-top:0;" onclick="showCourse()">📘 Ouvrir & Télécharger le Cours Soudure (PDF)</button>
+    </div>
+
     <div class="card">
       <label>👤 Nom et Prénom du Client :</label>
       <input type="text" id="fullName" placeholder="Ex: Ibrahima Sory Camara">
@@ -67,9 +75,10 @@
     </div>
   </div>
 
+  <!-- ZONE APERÇU CV -->
   <div id="cvPreviewArea">
-    <button class="btn btn-back" onclick="hideCV()">⬅️ Modifier les informations</button>
-    <button class="btn btn-cv" id="dlBtn" style="margin-top:0; margin-bottom:10px;" onclick="downloadDirectPDF()">📥 TÉLÉCHARGER LE FICHIER PDF COMPLET</button>
+    <button class="btn btn-back" onclick="hideAll()">⬅️ Retour à l'accueil</button>
+    <button class="btn btn-cv" id="dlBtn" style="margin-top:0; margin-bottom:10px;" onclick="downloadElementPDF('cvDocument', 'CV_Complet', 'dlBtn')">📥 TÉLÉCHARGER LE CV EN PDF</button>
 
     <div class="cv-sheet" id="cvDocument">
       <div class="cv-top">
@@ -82,6 +91,51 @@
         <div class="cv-sec"><div class="cv-sec-title">EXPÉRIENCES PROFESSIONNELLES</div><div class="cv-sec-content" id="outExp"></div></div>
         <div class="cv-sec"><div class="cv-sec-title">DIPLÔMES & FORMATIONS</div><div class="cv-sec-content" id="outEdu"></div></div>
         <div class="cv-sec"><div class="cv-sec-title">COMPÉTENCES & ATOUTS</div><div class="cv-sec-content" id="outSkills"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONE MANUEL DE SOUDURE PDF -->
+  <div id="courseArea">
+    <button class="btn btn-back" onclick="hideAll()">⬅️ Retour à l'accueil</button>
+    <button class="btn btn-course" id="dlCourseBtn" style="margin-top:0; margin-bottom:10px;" onclick="downloadElementPDF('courseDocument', 'Manuel_Soudure_Mine_Pro', 'dlCourseBtn')">📥 TÉLÉCHARGER LE COURS EN PDF</button>
+
+    <div class="cv-sheet" id="courseDocument">
+      <div class="cv-top" style="background:#8b0000;">
+        <h1>MANUEL PRO : SOUDURE MINIÈRE</h1>
+        <h3>Formation Accélérée — Maintenance Camions & Engins (SMAW)</h3>
+        <div class="cv-contact">📍 Spécial Mines de Guinée (Tanènè / Boffa / Boké) — Fiche de Révision Officielle</div>
+      </div>
+      <div class="cv-body">
+        <div class="lesson-box">
+          <h4>LEÇON 1 : LE MATÉRIEL, LES CAMIONS & LES AMPÈRES</h4>
+          <strong>• Procédé :</strong> Soudure à l'arc électrique à l'électrode enrobée (SMAW / MMA).<br>
+          <strong>• Les 4 éléments :</strong> Poste à souder (réglé en Ampères A), Pince de masse (-) fixée sur le fer propre, Porte-électrode (+) tenu en main, et Baguette enrobée.<br>
+          <strong>• ⚠️ RÈGLE D'OR CAMION (Sinotruk / Howo) :</strong> Toujours couper le <strong>coupe-batterie</strong> (ou débrancher la batterie) avant de souder sur une benne ou un châssis pour ne pas griller l'ordinateur (calculateur) du camion !<br>
+          <strong>• Réglage des Ampères (~35 à 40 A par mm) :</strong><br>
+          - Baguette <strong>2,5 mm</strong> (fer moyen) = <strong>80 à 90 A</strong><br>
+          - Baguette <strong>3,2 mm</strong> (benne de camion) = <strong>110 à 130 A</strong><br>
+          - Baguette <strong>4,0 mm</strong> (gros châssis / godet) = <strong>150 à 170 A</strong><br>
+          <strong>• Références Baguettes :</strong> <strong>E6013</strong> (standard facile) et <strong>E7018</strong> (baguette basique ultra-solide utilisée dans les mines contre les chocs de bauxite).
+        </div>
+
+        <div class="lesson-box">
+          <h4>LEÇON 2 : LE GESTE DE LA MAIN, LE POINTAGE & LE LAITIER</h4>
+          <strong>• Allumer sans coller (Amorçage) :</strong> Ne jamais piquer tout droit ! Frotter le bout de la baguette <strong>en biais comme une allumette</strong>. Dès que l'arc s'allume, maintenir la pointe à <strong>2 à 3 mm</strong> du fer.<br>
+          <strong>• Angle et Sens :</strong> Incliner la baguette à <strong>70°</strong> et <strong>TIRER vers soi</strong> régulièrement en tenant son poignet avec l'autre main gantée.<br>
+          <strong>• Le Pointage avant le Cordon :</strong> Toujours <strong>pointer les 4 coins</strong> d'une plaque de renfort avant de tirer le long cordon pour empêcher la chaleur de tordre le fer.<br>
+          <strong>• Le Laitier (Croûte noire) :</strong> Toujours casser la croûte noire après soudure avec le <strong>marteau à piquer</strong> et la <strong>brosse métallique</strong> avant de refaire une 2ème passe !
+        </div>
+
+        <div class="lesson-box" style="margin-bottom:0;">
+          <h4>LEÇON 3 : LA MEULEUSE, LE CHANFREIN EN V & LA SÉCURITÉ HSE</h4>
+          <strong>• Les 2 Disques de la Meuleuse (Disqueuse) :</strong><br>
+          1. <strong>Disque à Tronçonner (Fin : 1 à 2,5 mm) :</strong> Sert UNIQUEMENT à couper le fer (ne jamais meuler à plat avec !).<br>
+          2. <strong>Disque à Ébarber (Épais : 6 mm) :</strong> Sert à nettoyer (rouille, peinture, bauxite sèche) et creuser.<br>
+          <strong>• Réparer une fissure sur une benne :</strong> Creuser d'abord la fissure en forme de <strong>« V » (faire un CHANFREIN)</strong> avec le disque épais de 6 mm ➡️ Faire la 1ère passe au fond du V (pénétration) ➡️ Piquer le laitier ➡️ Faire la 2ème passe de remplissage à la baguette <strong>E7018</strong>.<br>
+          <strong>• Les 4 Positions :</strong> <strong>1G</strong> (À plat), <strong>2G</strong> (Horizontale), <strong>3G</strong> (Verticale montante en zigzag), <strong>4G</strong> (Plafond).<br>
+          <strong>• Sécurité HSE obligatoire :</strong> Masque noir (soudure), Lunettes transparentes (meulage), Gants cuir, Carter sur la meuleuse, Chaussures de sécurité, Extincteur à proximité.
+        </div>
       </div>
     </div>
   </div>
@@ -115,21 +169,30 @@
     document.getElementById('outEdu').innerText = document.getElementById('eduText').value;
     document.getElementById('outSkills').innerText = document.getElementById('skillsText').value;
     document.getElementById('editorArea').style.display = 'none';
+    document.getElementById('courseArea').style.display = 'none';
     document.getElementById('cvPreviewArea').style.display = 'block';
     window.scrollTo(0,0);
   }
 
-  function hideCV() {
+  function showCourse() {
+    document.getElementById('editorArea').style.display = 'none';
     document.getElementById('cvPreviewArea').style.display = 'none';
+    document.getElementById('courseArea').style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
+  function hideAll() {
+    document.getElementById('cvPreviewArea').style.display = 'none';
+    document.getElementById('courseArea').style.display = 'none';
     document.getElementById('editorArea').style.display = 'block';
   }
 
-  async function downloadDirectPDF() {
-    const btn = document.getElementById('dlBtn');
-    btn.innerText = "⏳ Génération du PDF complet...";
+  async function downloadElementPDF(elemId, defaultName, btnId) {
+    const btn = document.getElementById(btnId);
+    btn.innerText = "⏳ Génération du PDF en cours...";
     window.scrollTo(0, 0);
     try {
-      const element = document.getElementById('cvDocument');
+      const element = document.getElementById(elemId);
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
@@ -150,12 +213,10 @@
         imgWidth = (canvas.width * imgHeight) / canvas.height;
       }
       pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
-      const cleanName = (document.getElementById('fullName').value || "CV_Complet").replace(/\s+/g, '_');
-      pdf.save(cleanName + ".pdf");
-      btn.innerText = "✅ PDF Complet Téléchargé !";
+      pdf.save(defaultName + ".pdf");
+      btn.innerText = "✅ PDF Téléchargé avec succès !";
     } catch (e) {
       alert("Ouvrez https://hascams979-debug.github.io dans Chrome !");
-      btn.innerText = "📥 TÉLÉCHARGER LE FICHIER PDF COMPLET";
     }
   }
 
@@ -169,4 +230,4 @@
   }
 </script>
 </body>
-</html>
+        </html>
