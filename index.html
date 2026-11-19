@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,38 +17,41 @@
     input, textarea { width: 100%; padding: 10px; margin-top: 4px; border: 1px solid #ccd0d5; border-radius: 8px; font-size: 14px; }
     textarea { height: 75px; resize: vertical; }
     .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .btn-weld { background: #d9534f; color: #fff; }
     .btn-magic { background: #ff9800; color: #fff; }
     .btn-cv { background: #1a73e8; color: #fff; font-size: 16px; }
     .btn-wa { background: #25D366; color: #fff; font-size: 15px; }
     .btn-back { background: #333; color: #fff; margin-bottom: 8px; }
     #cvPreviewArea { display: none; }
-    .cv-sheet { background: white; border-radius: 4px; overflow: hidden; border: 1px solid #ddd; }
-    .cv-top { background: #1e3c72; color: white; padding: 22px 18px; }
-    .cv-top h1 { margin: 0; font-size: 22px; text-transform: uppercase; }
-    .cv-top h3 { margin: 6px 0 10px; font-size: 15px; color: #ffd700; }
-    .cv-contact { font-size: 13px; line-height: 1.6; }
-    .cv-body { padding: 18px; background: white; }
-    .cv-sec { margin-bottom: 15px; }
-    .cv-sec-title { font-size: 13px; font-weight: bold; color: #1e3c72; text-transform: uppercase; border-bottom: 2px solid #1e3c72; padding-bottom: 3px; margin-bottom: 6px; }
-    .cv-sec-content { font-size: 13px; line-height: 1.5; color: #222; white-space: pre-line; }
+    /* FORMAT EXACT A4 SANS COUPURE */
+    .cv-sheet { background: white; width: 100%; max-width: 700px; margin: 0 auto; border: 1px solid #ddd; overflow: visible; }
+    .cv-top { background: #1e3c72; color: white; padding: 18px 16px; }
+    .cv-top h1 { margin: 0; font-size: 20px; text-transform: uppercase; }
+    .cv-top h3 { margin: 5px 0 8px; font-size: 14px; color: #ffd700; }
+    .cv-contact { font-size: 12px; line-height: 1.5; }
+    .cv-body { padding: 14px 16px; background: white; }
+    .cv-sec { margin-bottom: 12px; }
+    .cv-sec-title { font-size: 12px; font-weight: bold; color: #1e3c72; text-transform: uppercase; border-bottom: 2px solid #1e3c72; padding-bottom: 2px; margin-bottom: 5px; }
+    .cv-sec-content { font-size: 12px; line-height: 1.45; color: #222; white-space: pre-line; }
   </style>
 </head>
 <body>
   <div id="editorArea">
     <div class="app-header">
       <h2>🇬🇳 Studio CV Pro & Lettre PDF</h2>
-      <p>Créez et téléchargez votre CV PDF en 1 clic</p>
+      <p>Créez et téléchargez votre CV PDF complet en 1 clic</p>
     </div>
     <div class="card">
       <label>👤 Nom et Prénom du Client :</label>
-      <input type="text" id="fullName" placeholder="Ex: Mamadou Saliou Diallo">
+      <input type="text" id="fullName" placeholder="Ex: Ibrahima Sory Camara">
       <label>🎯 Poste visé / Métier :</label>
       <input type="text" id="jobTitle" placeholder="Ex: Chauffeur / Comptable / Soudeur">
       <label>🏢 Entreprise visée (pour la Lettre) :</label>
       <input type="text" id="company" placeholder="Ex: Société Minière / Banque / ONG">
       <label>📞 Téléphone & Quartier :</label>
-      <input type="text" id="contactInfo" placeholder="Ex: +224 622 00 00 00 | Conakry, Guinée">
-      <button class="btn btn-magic" onclick="autoFillPro()">✨ Remplir le texte Pro automatiquement</button>
+      <input type="text" id="contactInfo" placeholder="Ex: +224 622 00 00 00 | Tanènè, Guinée">
+      <button class="btn btn-weld" onclick="fillWelder()">👨‍🏭 Remplir Exemple SOUDEUR MINE (1 clic)</button>
+      <button class="btn btn-magic" onclick="autoFillPro()">✨ Remplir pour un autre métier (Client)</button>
     </div>
     <div class="card">
       <label>📝 Profil Professionnel :</label>
@@ -67,7 +69,7 @@
 
   <div id="cvPreviewArea">
     <button class="btn btn-back" onclick="hideCV()">⬅️ Modifier les informations</button>
-    <button class="btn btn-cv" id="dlBtn" style="margin-top:0; margin-bottom:10px;" onclick="downloadDirectPDF()">📥 TÉLÉCHARGER LE FICHIER PDF</button>
+    <button class="btn btn-cv" id="dlBtn" style="margin-top:0; margin-bottom:10px;" onclick="downloadDirectPDF()">📥 TÉLÉCHARGER LE FICHIER PDF COMPLET</button>
 
     <div class="cv-sheet" id="cvDocument">
       <div class="cv-top">
@@ -85,6 +87,16 @@
   </div>
 
 <script>
+  function fillWelder() {
+    document.getElementById('fullName').value = document.getElementById('fullName').value || "Ibrahima Sory Camara";
+    document.getElementById('jobTitle').value = "Soudeur à l'Arc (SMAW) / Chaudronnier Maintenance Minière";
+    document.getElementById('profileText').value = "Soudeur-Chaudronnier qualifié et rigoureux, spécialisé dans la maintenance et la réparation d'équipements miniers lourds (bennes de camions Sinotruk/Howo, châssis et godets d'engins). Parfaite maîtrise du soudage à l'arc (SMAW/MMA) aux électrodes E7018 et E6013, du meulage de précision et du strict respect des normes de sécurité minière (HSE).";
+    document.getElementById('expText').value = "• 2023 - 2025 : Soudeur & Chaudronnier d'Atelier — Zone Minière de Tanènè / Boffa\n- Réparation de fissures sur bennes de camions miniers : chanfreinage en V à la meuleuse (disque 6mm), passes de pénétration et remplissage à la baguette basique E7018 (3,2 mm et 4 mm entre 110A et 160A).\n- Découpe au disque à tronçonner, pointage d'équerrage aux 4 coins et pose de plaques de renfort.\n- Mise en sécurité électrique systématique des camions avant soudage (coupe-batterie).\n\n• 2021 - 2023 : Aide-Soudeur & Ouvrier Métallique — Conakry\n- Préparation des surfaces (meulage, ébarbage, piquage du laitier au marteau et brossage).\n- Soudage toutes positions (1G à plat, 2G horizontal, 3G verticale montante).";
+    document.getElementById('eduText').value = "• Certificat de Formation Pratique en Soudure à l'Arc Électrique (SMAW) & Chaudronnerie\n• Attestation de Sensibilisation aux Règles de Sécurité en Atelier Minier (HSE, port des EPI, prévention incendie).";
+    document.getElementById('skillsText').value = "• Technique : Soudure à l'arc (80A à 170A), Baguettes E7018 et E6013, Chanfrein en V, Meuleuse d'angle (2mm / 6mm), Pointage anti-déformation.\n• Sécurité HSE : Port strict des EPI (Masque de soudure, Gants cuir, Lunettes, Chaussures de sécurité).\n• Langues : Français (Courant, lu et écrit), Soussou, Poular, Malinké.";
+    alert("👨‍🏭 CV Soudeur rempli en 1 clic !");
+  }
+
   function autoFillPro() {
     const job = document.getElementById('jobTitle').value.trim() || "Professionnel qualifié";
     document.getElementById('profileText').value = `Professionnel dynamique, rigoureux et doté d'un grand sens des responsabilités en tant que ${job}. Habitué aux exigences de sécurité et de performance, je souhaite mettre mon savoir-faire au service de votre entreprise.`;
@@ -97,7 +109,7 @@
   function showCV() {
     document.getElementById('outName').innerText = document.getElementById('fullName').value || "MAMADOU DIALLO";
     document.getElementById('outJob').innerText = document.getElementById('jobTitle').value || "PROFESSIONNEL QUALIFIÉ";
-    document.getElementById('outContact').innerText = "📍 " + (document.getElementById('contactInfo').value || "Conakry, République de Guinée");
+    document.getElementById('outContact').innerText = "📍 " + (document.getElementById('contactInfo').value || "Tanènè / Conakry, République de Guinée");
     document.getElementById('outProfile').innerText = document.getElementById('profileText').value;
     document.getElementById('outExp').innerText = document.getElementById('expText').value;
     document.getElementById('outEdu').innerText = document.getElementById('eduText').value;
@@ -114,22 +126,36 @@
 
   async function downloadDirectPDF() {
     const btn = document.getElementById('dlBtn');
-    btn.innerText = "⏳ Génération du PDF en cours...";
+    btn.innerText = "⏳ Génération du PDF complet...";
+    window.scrollTo(0, 0);
     try {
       const element = document.getElementById('cvDocument');
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        scrollY: 0,
+        height: element.scrollHeight,
+        windowHeight: element.scrollHeight + 100
+      });
       const imgData = canvas.toDataURL('image/jpeg', 0.98);
       const { jsPDF } = window.jspdf;
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth() - 16;
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, 'JPEG', 8, 8, pdfWidth, pdfHeight);
-      const cleanName = (document.getElementById('fullName').value || "CV_Professionnel").replace(/\s+/g, '_');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 8;
+      let imgWidth = pageWidth - (margin * 2);
+      let imgHeight = (canvas.height * imgWidth) / canvas.width;
+      if (imgHeight > pageHeight - (margin * 2)) {
+        imgHeight = pageHeight - (margin * 2);
+        imgWidth = (canvas.width * imgHeight) / canvas.height;
+      }
+      pdf.addImage(imgData, 'JPEG', margin, margin, imgWidth, imgHeight);
+      const cleanName = (document.getElementById('fullName').value || "CV_Complet").replace(/\s+/g, '_');
       pdf.save(cleanName + ".pdf");
-      btn.innerText = "✅ PDF Téléchargé dans votre téléphone !";
+      btn.innerText = "✅ PDF Complet Téléchargé !";
     } catch (e) {
-      alert("Astuce : Ouvrez https://hascams979-debug.github.io dans Google Chrome pour télécharger le PDF !");
-      btn.innerText = "📥 TÉLÉCHARGER LE FICHIER PDF";
+      alert("Ouvrez https://hascams979-debug.github.io dans Chrome !");
+      btn.innerText = "📥 TÉLÉCHARGER LE FICHIER PDF COMPLET";
     }
   }
 
